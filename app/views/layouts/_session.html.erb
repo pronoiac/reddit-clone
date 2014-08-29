@@ -1,0 +1,7 @@
+<%# fail %>
+<% if logged_in? %>
+  <p>Howdy <%= current_user.username %>!</p>
+  <%= button_to "Log out", session_url, method: :delete %>
+<% else %>
+  <p>Not logged in</p>
+<% end %>

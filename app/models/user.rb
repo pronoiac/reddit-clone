@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
 
-  def self.find_user_by_credentials(username, password)
+  def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil if user.nil?
-    user.password_digest.is_password?(password) ? user : nil
+    user.is_password?(password) ? user : nil
   end
 
   
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   def reset_session_token
     # for signing out. 
     self.session_token = generate_session_token
-    session[:session_token] = nil
+    self.save!
   end
   
 end

@@ -1,0 +1,18 @@
+<!-- Notices --> 
+<% unless flash[:notices].nil? %>
+  <ul>
+    <% flash[:notices].each do |notice| %>
+      <li> <%= notice %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- Errors --> 
+<% unless flash[:errors].nil? %>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li> <%= error %> </li>
+    <% end %>
+  </ul>
+<% end %>
+
