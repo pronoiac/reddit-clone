@@ -1,0 +1,12 @@
+<h2><%= @sub.title %></h2>
+<p><em><%= @sub.description %></em></p>
+
+<p>Moderator is: <%= @sub.moderator.username %>.
+
+<% if @sub.moderator == current_user %>
+  Hey! That's you!
+  Want to <%= link_to "edit sub", edit_sub_url(@sub), method: :get %>?
+<% end %>
+</p>
+
+<%= link_to "All Subs", subs_url, method: :get %>

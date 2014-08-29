@@ -4,4 +4,6 @@
   <%= button_to "Log out", session_url, method: :delete %>
 <% else %>
   <p>Not logged in</p>
+  <%= link_to "Login", new_session_url, method: :get %> or 
+  <%= link_to "Register", new_user_url, method: :get %>
 <% end %>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user
       login!(user)
       # fail
-      redirect_to users_url
+      redirect_to subs_url
     else
       flash[:error] = user.errors.full_messages
       render :new

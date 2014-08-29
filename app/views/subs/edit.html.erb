@@ -1,0 +1,4 @@
+<h2>Edit the <%= @sub.title %> Sub</h2>
+
+<%= render "layouts/subs_form", 
+        action: sub_url(@sub), method: "patch", sub: @sub %>
