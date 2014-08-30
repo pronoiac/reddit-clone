@@ -18,3 +18,7 @@
 label {
   display: block;
 }
+
+.content {
+  width: 300px;
+}

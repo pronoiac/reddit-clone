@@ -3,20 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  helper_method :auth_token, :current_user, :logged_in?
-  
-  def auth_token
-    token = '<input type="hidden" name="authenticity_token" value="'
-    token += form_authenticity_token
-    token += '">'
-    token.html_safe
-  end
+  helper_method :current_user, :logged_in?
   
   def login!(user)
-    user.session_token = user.generate_session_token
+    user.reset_session_token!
     session[:session_token] = user.session_token
     @current_user = user
-    user.save!
   end
   
   def current_user
@@ -25,6 +17,12 @@ class ApplicationController < ActionController::Base
   
   def logged_in?
     !!current_user
+  end
+  
+  def require_user
+    return if logged_in?
+    flash[:errors] ||= [] << "Must be logged in to create a sub."
+    redirect_to subs_url unless logged_in?
   end
   
 end

@@ -1,4 +1,5 @@
 class Sub < ActiveRecord::Base
+  validates :title, :description, :moderator, presence: true
   
   belongs_to(
     :moderator,
@@ -7,5 +8,10 @@ class Sub < ActiveRecord::Base
     primary_key: :id
   )
   
-  validates :title, :description, :moderator_id, presence: true
+  has_many(
+    :posts,
+    class_name: "Post",
+    foreign_key: :sub_id,
+    primary_key: :id
+  )
 end

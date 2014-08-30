@@ -1,0 +1,4 @@
+<h2>Edit <%= @post.title %>!</h2>
+
+<%= render "layouts/post_form", action: post_url(@post), 
+  method: :patch, post: @post %>

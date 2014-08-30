@@ -9,4 +9,9 @@
 <% end %>
 </p>
 
-<%= link_to "All Subs", subs_url, method: :get %>
+<ol>
+<% @sub.posts.each do |post| %>
+  <li><%= link_to post.title, post_url(post) %>, 
+    posted by <%= post.author.username %> </li>
+<% end %>
+</ol>

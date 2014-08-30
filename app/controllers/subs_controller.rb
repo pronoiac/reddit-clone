@@ -7,15 +7,13 @@ class SubsController < ApplicationController
   end
   
   def create
-    user = current_user
-    @sub = user.subs.new(sub_params)
+    @sub = current_user.subs.new(sub_params)
     
     if @sub.save
-      #login!(@sub)
       flash[:notices] ||= [] << "Sub \"#{ @sub.title }\" created. Success!"
       redirect_to subs_url
     else
-      flash[:errors] ||= [] << @sub.errors.full_messages
+      flash[:errors] = @sub.errors.full_messages
       render :new
     end
   end
@@ -38,7 +36,7 @@ class SubsController < ApplicationController
       flash[:notices] ||= [] << "Sub \"#{ @sub.title }\" edited!"
       redirect_to sub_url(@sub)
     else
-      flash[:errors] ||= [] << @sub.errors.full_messages
+      flash[:errors] = @sub.errors.full_messages
       render :edit
     end
   end
@@ -51,13 +49,7 @@ class SubsController < ApplicationController
   private
   
   def sub_params
-    params.require(:sub).permit(:title, :description, :moderator_id)
+    params.require(:sub).permit(:title, :description)
   end
-  
-  def require_user
-    return if logged_in?
-    flash[:errors] ||= [] << "Must be logged in to create a sub."
-    redirect_to subs_url unless logged_in?
-  end
-  
+    
 end
